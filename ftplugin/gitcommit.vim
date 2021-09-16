@@ -9,7 +9,7 @@ let b:loaded_gitcommit_issue_id = 1
 function! s:InsertIssueId()
   if getline(1) == ''
     let l:branch = system("git rev-parse --abbrev-ref HEAD")
-    let b:issue_id = substitute(branch, '^\([^-]\+-\d\+\)*-*.*', '\1', '')
+    let b:issue_id = matchstr(branch, '\([^-/]\+-\d\+\)')
     if !empty(b:issue_id)
       call setline(1, b:issue_id . ': ')
       call feedkeys("\<End>")
