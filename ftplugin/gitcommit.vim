@@ -11,8 +11,8 @@ function! s:InsertIssueId()
     let l:branch = system("git rev-parse --abbrev-ref HEAD")
     let b:issue_id = matchstr(branch, '\([^-/]\+-\d\+\)')
     if !empty(b:issue_id)
-    echom 'Choose template:'
-    while 1
+      echom 'Choose template:'
+      while 1
         let choice = inputlist(['1. Symantic release + Jira ID', '2. Jira ID', '3. None'])
         if choice == 0 || choice > 3
           redraw!
@@ -23,13 +23,12 @@ function! s:InsertIssueId()
         elseif choice == 1
           call setline(1, 'feat(' . b:issue_id . '): ')
           call feedkeys("\<End>")
-        elseif choice == 1
+        elseif choice == 2
           call setline(1,  b:issue_id . ': ')
           call feedkeys("\<End>")
-        elseif choice == 3
-          quit!
+        else
+          break
         endif
-        break
       endwhile
     endif
   endif
