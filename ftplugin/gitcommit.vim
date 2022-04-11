@@ -12,21 +12,14 @@ function! s:InsertIssueId()
     let b:issue_id = matchstr(branch, '\([^-/]\+-\d\+\)')
     if !empty(b:issue_id)
       echom 'Choose template:'
-      while 1
-        let choice = inputlist(['1. Symantic release + Jira ID', '2. Jira ID', '3. None'])
-        if choice == 0 || choice > 3
-          redraw!
-          echo 'Please enter a number between 1 and 3'
-          continue
-        elseif choice == 1
-          call setline(1, 'feat(' . b:issue_id . '): ')
-          call feedkeys("\<End>")
-        elseif choice == 2
-          call setline(1,  b:issue_id . ': ')
-          call feedkeys("\<End>")
-        endif
-        break
-      endwhile
+      let choice = inputlist(['1. None (default)','2. Symantic release + Jira ID', '3. Jira ID'])
+      if choice == 2
+        call setline(1, 'feat(' . b:issue_id . '): ')
+        call feedkeys("\<End>")
+      elseif choice == 3
+        call setline(1,  b:issue_id . ': ')
+        call feedkeys("\<End>")
+      endif
     endif
   endif
 endfunction
