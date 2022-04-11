@@ -16,9 +16,7 @@ function! s:InsertIssueId()
         let choice = inputlist(['1. Symantic release + Jira ID', '2. Jira ID', '3. None'])
         if choice == 0 || choice > 3
           redraw!
-          echohl WarningMsg
           echo 'Please enter a number between 1 and 3'
-          echohl None
           continue
         elseif choice == 1
           call setline(1, 'feat(' . b:issue_id . '): ')
@@ -26,9 +24,8 @@ function! s:InsertIssueId()
         elseif choice == 2
           call setline(1,  b:issue_id . ': ')
           call feedkeys("\<End>")
-        else
-          break
         endif
+        break
       endwhile
     endif
   endif
