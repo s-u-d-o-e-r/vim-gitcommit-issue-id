@@ -13,10 +13,9 @@ function! s:InsertIssueId()
     if !empty(b:issue_id)
       echom 'Choose template:'
       let useTemplate= confirm("Do you want to use template?", "&Yes\n&No", 2)
-      let template= confirm("Choose template:", "&Jira ID\n&Semantic Jira ID", 1)
 
       if useTemplate == 1
-
+      let template= confirm("Choose template:", "&Jira ID\n&Semantic Jira ID", 1)
         if template == 1
           call setline(1,  b:issue_id . ': ')
           call feedkeys("\<End>")
@@ -41,10 +40,9 @@ function! s:InsertIssueId()
             call setline(1, 'docs(' . b:issue_id . '): ')
           elseif semanticTemplate ==8
             call setline(1, 'ci(' . b:issue_id . '): ')
-
           endif
-          call feedkeys("\<End>")
 
+          call feedkeys("\<End>")
         endif
       endif
     endif
